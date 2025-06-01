@@ -10,7 +10,7 @@ public class Cuenta {
     private int saldo;
 
     public Cuenta(int saldo) {
-        this.cuentaCorriente = ++contadorCuenta; // asigna número único
+        this.cuentaCorriente = ++contadorCuenta;
         this.saldo = saldo;
     }
 
