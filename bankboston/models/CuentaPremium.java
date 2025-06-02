@@ -16,14 +16,14 @@ public class CuentaPremium extends Cuenta {
     }   
 
     @Override
-    public void mostrarDatos() {
+    public void mostrarDatos() { 
         System.out.println("Cuenta Premium: " + cuentaCorriente);
         System.out.println("Saldo: " + saldo);
     }
     
     // Cobra porcentaje de saldo por 
     @Override
-    public void especialGiro(int valor) {
+    public void girarSaldo(int valor) {
         this.saldo += valor;
     }
   

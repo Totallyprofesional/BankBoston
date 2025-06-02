@@ -21,16 +21,16 @@ public class CuentaAhorro extends Cuenta {
   
     // Bloquea giro hasta 6 meses desde creacion de la cuenta
     @Override
-    public void especialGiro(int valor) {
+    public void girarSaldo(int valor) { 
         relojRetiro(valor);   
     }
     
-    public void relojRetiro (int valor){    
+    public void relojRetiro (int monto){    
         LocalDate día = LocalDate.now();
         LocalDate fechaRetiro = fechaCreación.plusMonths(6);
         
         if (día == fechaRetiro){
-            super.girarSaldo(monto);       
+           this.saldo -= monto;;       
         } else { 
             System.out.println("No se puede girar saldo. Fecha de retiro: " + fechaRetiro);
         }          
