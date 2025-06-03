@@ -12,7 +12,7 @@ import bankboston.models.Cliente;
 
 public class BankManager {
     private Map < String, Cliente > clientes;
-    private int contadorClientes;
+    private int contadorClientes; 
     
     private static BankManager instancia;
     
