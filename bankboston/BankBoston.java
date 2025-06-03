@@ -4,13 +4,28 @@
  */
 package bankboston;
 
-public class BankBoston {
+import bankboston.managers.BankManager;
+import java.util.Scanner;
+import bankboston.models.Cliente;
+import bankboston.models.Cuenta;
+import bankboston.models.CuentaNormal; 
+import bankboston.models.CuentaAhorro;
+import bankboston.models.CuentaPremium;
 
+public class BankBoston {
+    public static Scanner sc = new Scanner(System.in);
+    public static BankManager bankManager = BankManager.getInstancia();
+    public static Cliente clienteActual; 
+    public static Cuenta CuentaActual; 
+    public static CuentaNormal CuentaNormal;  
+    public static CuentaAhorro CuentaAhorro;
+    public static CuentaPremium CuentaPremium;   
+ 
     public static void main(String[] args) {
         System.out.println("Menú Bank Boston");
-        
-        Menu menu = new Menu(); 
+             
+        Menu menu = new Menu(sc, bankManager, clienteActual, CuentaActual, CuentaNormal, CuentaAhorro, CuentaPremium);  
         menu.mostrarMenu(); 
     }  
 }  
-        
+               

@@ -9,19 +9,28 @@ import java.util.Scanner;
 import bankboston.managers.BankManager;
 import bankboston.models.Cliente;
 import bankboston.models.Cuenta;
+import bankboston.models.CuentaNormal;
+import bankboston.models.CuentaAhorro;
+import bankboston.models.CuentaPremium;
 import java.util.InputMismatchException;
  
 public class Menu {
     private Scanner sc;
     private BankManager bankManager;
     private Cliente clienteActual;
-    private Cuenta cuentaActual;
-    
-    public Menu() {
+    private Cuenta CuentaActual;
+    private Cuenta CuentaNormal;  
+    private Cuenta CuentaAhorro; 
+    private Cuenta CuentaPremium;  
+
+    public Menu(Scanner sc, BankManager bankManager, Cliente clienteActual, Cuenta CuentaActual, Cuenta CuentaNormal, Cuenta CuentaAhorro, Cuenta CuentaPremium) {
         sc = new Scanner(System.in);
         bankManager = BankManager.getInstancia();
-        clienteActual = null;
-        cuentaActual = null;
+        this.clienteActual = clienteActual;
+        this.CuentaActual = CuentaActual;
+        this.CuentaNormal = CuentaNormal;
+        this.CuentaAhorro = CuentaAhorro;
+        this.CuentaPremium = CuentaPremium;
     }
      
     public void mostrarMenu() {
@@ -45,10 +54,10 @@ public class Menu {
                 System.out.println("Valor no válido");
                 sc.nextLine();
             }
-            
+             
             switch (opcion) {
                 case 1:
-                    registrarCliente(sc);       
+                    registrarCliente(sc);   
                     break;
                 case 2:
                     verDatosCliente(sc);
@@ -71,9 +80,40 @@ public class Menu {
             }         
         } while (opcion != 6);
     } 
+     
+    public void tipoCuenta(Scanner sc, int saldo, int monto, int creditoPremium, double valor) {    
+    int tipo = 0;
+    
+        do{
+            System.out.println("Tipos de cuenta");
+            System.out.println("1) Cuenta Normal");
+            System.out.println("2) Cuenta Ahorro");
+            System.out.println("3) Cuenta Premium");
+            System.out.println("4) Salir");
+            System.out.println("Elija una opción");
+            tipo = sc.nextInt();
+     
+            switch (tipo) {
+                case 1:
+                    CuentaActual = new CuentaNormal(saldo, monto);
+                    break;
+                case 2:
+                    CuentaActual = new CuentaAhorro(saldo, monto);
+                    break;
+                case 3:
+                    CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);
+                    break;
+                case 4:   
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    break;
+            }      
+        } while (tipo != 4); 
+    }
 
-    public void registrarCliente(Scanner sc) {
-        System.out.println("\n===== REGISTRO DE CLIENTE =====");
+    public void registrarCliente(Scanner sc) {      
+        System.out.println("\n===== Regriso de cliente =====");
         System.out.print("Ingrese rut (sin guión y puntos): "); 
         String rut = sc.nextLine();
         
@@ -97,21 +137,17 @@ public class Menu {
           
         try {     
             Cliente nuevoCliente = new Cliente(rut, nombre, apellidoPaterno, apellidoMaterno, domicilio, comuna, teléfono);      
+            
             if (nuevoCliente.registrarCliente() && bankManager.agregarCliente(nuevoCliente)) {         
-                clienteActual = nuevoCliente;
-                 
-                cuentaActual = new Cuenta(0); 
-                clienteActual.setCuenta(cuentaActual);
+                clienteActual = nuevoCliente;               
+                CuentaActual.mostrarDatos();  
                 System.out.print("Cuenta creada exitosamente: ");
-                cuentaActual.mostrarDatos();
-                
-            }
+            }  
         } catch (IllegalArgumentException e) { 
             System.out.println("Error: " + e.getMessage());          
         } 
-    }
-    
-    // Metodo para verificar rut
+    }  
+       
     public void verificarRut(Scanner sc) {
         System.out.print("Ingrese RUT del cliente: ");
         String rut = sc.nextLine();
@@ -129,7 +165,7 @@ public class Menu {
         verificarRut(sc);
         
         if (clienteActual != null) {  
-            cuentaActual.mostrarDatos();
+            CuentaActual.mostrarDatos();
         } else {
             System.out.println("No hay datos de cliente");
         }
@@ -137,15 +173,15 @@ public class Menu {
     
     private void depositarCuenta(Scanner sc) {
         verificarRut(sc);
-        cuentaActual.mostrarDatos();
+        CuentaActual.mostrarDatos();
         
         int monto = 0;
         
         try {
             System.out.println("Ingrese monto");
             monto = sc.nextInt();
-            cuentaActual.depositarSaldo(monto);  
-            System.out.println("Saldo actual: " + cuentaActual.getSaldo());
+            CuentaActual.depositarSaldo(monto);  
+            System.out.println("Saldo actual: " + CuentaActual.getSaldo());
         } catch (InputMismatchException e) {
             System.out.println("Valor no válido");
         }   
@@ -153,15 +189,15 @@ public class Menu {
         
     private void girarCuenta(Scanner sc) {
         verificarRut(sc);
-        cuentaActual.mostrarDatos();
+        CuentaActual.mostrarDatos();
         
         int monto = 0;
         
         try {
             System.out.println("Ingrese monto");
             monto = sc.nextInt();
-            cuentaActual.girarSaldo(monto);  
-            System.out.println("Saldo actual: " + cuentaActual.getSaldo());
+            CuentaActual.girarSaldo(monto);  
+            System.out.println("Saldo actual: " + CuentaActual.getSaldo());
         } catch (InputMismatchException e) {
             System.out.println("Valor no válido");
         }   
@@ -173,7 +209,7 @@ public class Menu {
         
         Cliente nuevoCliente = bankManager.buscarCliente(rut);
         if (nuevoCliente != null) {  
-            System.out.println("Saldo actual: " + cuentaActual.getSaldo());
+            System.out.println("Saldo actual: " + CuentaActual.getSaldo());
         } else {
             System.out.println("No se encontró ningún cliente con ese RUT");
         }   
