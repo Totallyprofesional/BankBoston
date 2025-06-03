@@ -7,7 +7,7 @@ package bankboston.models;
 public class CuentaPremium extends Cuenta {
     private int creditoPremium = 500000;
     private double valor;
- 
+  
     public CuentaPremium (int saldo, int monto, int creditoPremium, double valor){ 
         super(saldo, monto);
         this.creditoPremium = creditoPremium;

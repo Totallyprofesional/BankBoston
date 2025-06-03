@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package bankboston.models;
-
-public class Cliente {
+ 
+public class Cliente implements Interfaz {
     private String rut;
-    private String nombre;
+    private String nombre; 
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String domicilio;
@@ -44,7 +44,7 @@ public class Cliente {
         return false;    
     }
     
-    // Revision
+    @Override
     public void verDatosCliente() {
         System.out.println("\n========== Datos del cliente ==========");
         System.out.println("RUT: " + this.rut);
@@ -54,7 +54,6 @@ public class Cliente {
         System.out.println("Teléfono: " + this.teléfono); 
     }
 
-    // Para Bankmanager.agregarCliente & Bankmanager.buscarCliente
     public String getRut() {
         return rut;
     }

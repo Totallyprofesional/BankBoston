@@ -4,8 +4,6 @@
  */
 package bankboston.models;
 
-// 3) Interfaz
-// Muestra datos
 public interface Interfaz {
     void verDatosCliente();
 } 

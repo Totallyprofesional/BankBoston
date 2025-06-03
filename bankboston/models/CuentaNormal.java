@@ -7,7 +7,7 @@ package bankboston.models;
 public class CuentaNormal extends Cuenta { 
  
     public CuentaNormal (int saldo, int monto){ 
-        super(saldo, monto);
+        super(saldo, monto); 
     } 
 
     @Override

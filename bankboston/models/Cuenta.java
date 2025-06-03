@@ -4,33 +4,28 @@
  */
 package bankboston.models;
 
-public class Cuenta {
-    private static int contadorCuenta = 1000; 
-    private int cuentaCorriente;
-    private int saldo;
+import java.time.LocalDate;
 
-    public Cuenta(int saldo) {
+public abstract class Cuenta { 
+    protected LocalDate fechaCreacion;
+    protected int contadorCuenta = 1000;   
+    protected int cuentaCorriente;
+    protected int saldo; 
+    protected int monto;
+
+    public Cuenta(int saldo, int monto) {
         this.cuentaCorriente = ++contadorCuenta;
         this.saldo = saldo;
-    }
-
-    public void mostrarDatos() {
-        System.out.println("Cuenta Corriente: " + this.cuentaCorriente);
-        System.out.println("Saldo: " + this.saldo);
-    }
-
+        this.monto = monto;
+        this.fechaCreacion = LocalDate.now();
+    } 
+ 
+    public abstract void mostrarDatos(); 
+      
+    public abstract void girarSaldo(int monto);
+ 
     public void depositarSaldo(int monto) {
         this.saldo += monto;
-    }
-
-    public void girarSaldo(int monto) {
-        if (monto <= 0) {
-            throw new IllegalArgumentException("El monto debe ser mayor que 0");
-        }
-        if (monto > this.saldo) {
-            throw new IllegalArgumentException("Saldo insuficiente");
-        }
-        this.saldo -= monto;
     }
 
     public int getCuentaCorriente() {
@@ -40,5 +35,5 @@ public class Cuenta {
     public int getSaldo() {
         return saldo;
     }
-
+    
 }
