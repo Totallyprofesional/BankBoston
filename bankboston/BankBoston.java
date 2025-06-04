@@ -14,7 +14,7 @@ import bankboston.models.CuentaPremium;
 
 public class BankBoston {
     public static Scanner sc = new Scanner(System.in);
-    public static BankManager bankManager;
+    public static BankManager bankManager; 
     public static Cliente clienteActual; 
     public static Cuenta CuentaActual;  
     public static CuentaNormal CuentaNormal;  

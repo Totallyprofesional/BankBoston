@@ -59,8 +59,7 @@ public class Menu {
              
             switch (opcion) {
                 case 1:
-                    tipoCuenta(sc); 
-                    registrarCliente(sc);
+                    tipoCuenta(sc);            
                     break;
                 case 2:
                     verDatosCliente();
@@ -110,17 +109,20 @@ public class Menu {
      
             switch (tipo) {
                 case 1:
-                    CuentaActual = new CuentaNormal(saldo, monto);           
-                    break;
+                    CuentaActual = new CuentaNormal(saldo, monto);       
+                    registrarCliente(sc);
+                    return;
                 case 2:
-                    CuentaActual = new CuentaAhorro(saldo, monto);                        
-                    break;
+                    CuentaActual = new CuentaAhorro(saldo, monto);         
+                    registrarCliente(sc);
+                    return;
                 case 3:
-                    CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);                              
-                    break;
+                    CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);
+                    registrarCliente(sc);
+                    return;
                 case 4:     
                     System.out.println("Saliendo del menú");
-                    break;
+                    return;
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
