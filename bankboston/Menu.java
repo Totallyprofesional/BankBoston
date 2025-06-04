@@ -123,7 +123,7 @@ public class Menu {
 
     public void registrarCliente(Scanner sc) {    
         
-        System.out.println("\n===== Regriso de cliente =====");
+        System.out.println("\n===== Registro de cliente =====");
         System.out.print("Ingrese rut (sin guión y puntos): "); 
         String rut = sc.nextLine();
         
@@ -178,7 +178,7 @@ public class Menu {
             CuentaActual.mostrarDatos();
         } else {
             System.out.println("No hay datos de cliente");
-        }
+        } 
     }     
     
     private void depositarCuenta(Scanner sc) {
