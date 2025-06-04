@@ -36,6 +36,7 @@ public class Menu {
      
     public void mostrarMenu() {
         int opcion = 0;
+        
         do {
             System.out.println("\n===== SISTEMA DE GESTIÓN BANK BOSTON =====");
             System.out.println("Clientes: " + bankManager.getCantidadClientes());
@@ -58,8 +59,8 @@ public class Menu {
              
             switch (opcion) {
                 case 1:
-                    tipoCuenta(sc);
-                    registrarCliente(sc);   
+                    tipoCuenta(sc); 
+                    registrarCliente(sc);
                     break;
                 case 2:
                     verDatosCliente();
@@ -86,7 +87,7 @@ public class Menu {
     public void tipoCuenta(Scanner sc) {    
     int saldo = 0;
     int monto = 0;
-    int creditoPremium = 0; 
+    int creditoPremium = 0;  
     double valor = 0;
     int tipo = 0;
     
@@ -98,26 +99,32 @@ public class Menu {
             System.out.println("3) Cuenta Premium");
             System.out.println("4) Salir");
             System.out.println("\n Elija una opción");
-            tipo = sc.nextInt();
+               
+            try {
+                tipo = sc.nextInt(); 
+                sc.nextLine(); 
+            } catch (InputMismatchException e) {
+                System.out.println("Valor no válido");
+                sc.nextLine();
+            } 
      
             switch (tipo) {
                 case 1:
-                    CuentaActual = new CuentaNormal(saldo, monto);
+                    CuentaActual = new CuentaNormal(saldo, monto);           
                     break;
                 case 2:
-                    CuentaActual = new CuentaAhorro(saldo, monto);
+                    CuentaActual = new CuentaAhorro(saldo, monto);                        
                     break;
                 case 3:
-                    CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);
+                    CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);                              
                     break;
                 case 4:     
                     System.out.println("Saliendo del menú");
-                    mostrarMenu();
                     break;
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
-            }                   
+            }     
         } while (tipo != 4); 
     }
 
