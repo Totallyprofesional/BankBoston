@@ -6,26 +6,27 @@ package bankboston;
 
 import java.util.List; 
 import java.util.Scanner;
+import java.util.InputMismatchException; 
+
 import bankboston.managers.BankManager;
 import bankboston.models.Cliente;
 import bankboston.models.Cuenta;
 import bankboston.models.CuentaNormal;
-import bankboston.models.CuentaAhorro;
-import bankboston.models.CuentaPremium;
-import java.util.InputMismatchException;
+import bankboston.models.CuentaAhorro; 
+import bankboston.models.CuentaPremium; 
  
 public class Menu {
-    private Scanner sc;
+    private Scanner sc;  
     private BankManager bankManager;
     private Cliente clienteActual;
-    private Cuenta CuentaActual;
-    private Cuenta CuentaNormal;  
+    private Cuenta CuentaActual;  
+    private Cuenta CuentaNormal;   
     private Cuenta CuentaAhorro; 
     private Cuenta CuentaPremium;  
-
+    
     public Menu(Scanner sc, BankManager bankManager, Cliente clienteActual, Cuenta CuentaActual, Cuenta CuentaNormal, Cuenta CuentaAhorro, Cuenta CuentaPremium) {
-        sc = new Scanner(System.in);
-        bankManager = BankManager.getInstancia();
+        this.sc = sc;
+        this.bankManager = BankManager.getInstancia();
         this.clienteActual = clienteActual;
         this.CuentaActual = CuentaActual;
         this.CuentaNormal = CuentaNormal;
@@ -57,12 +58,13 @@ public class Menu {
              
             switch (opcion) {
                 case 1:
+                    tipoCuenta(sc);
                     registrarCliente(sc);   
                     break;
                 case 2:
-                    verDatosCliente(sc);
+                    verDatosCliente();
                     break;
-                case 3: 
+                case 3:  
                     depositarCuenta(sc);  
                     break;
                 case 4:
@@ -81,16 +83,21 @@ public class Menu {
         } while (opcion != 6);
     } 
      
-    public void tipoCuenta(Scanner sc, int saldo, int monto, int creditoPremium, double valor) {    
+    public void tipoCuenta(Scanner sc) {    
+    int saldo = 0;
+    int monto = 0;
+    int creditoPremium = 0; 
+    double valor = 0;
     int tipo = 0;
     
-        do{
-            System.out.println("Tipos de cuenta");
+        do {
+            System.out.println("\n Tipos de cuenta"); 
+             System.out.println("");
             System.out.println("1) Cuenta Normal");
             System.out.println("2) Cuenta Ahorro");
             System.out.println("3) Cuenta Premium");
             System.out.println("4) Salir");
-            System.out.println("Elija una opción");
+            System.out.println("\n Elija una opción");
             tipo = sc.nextInt();
      
             switch (tipo) {
@@ -103,16 +110,19 @@ public class Menu {
                 case 3:
                     CuentaActual = new CuentaPremium(saldo, monto, creditoPremium, valor);
                     break;
-                case 4:   
+                case 4:     
+                    System.out.println("Saliendo del menú");
+                    mostrarMenu();
                     break;
                 default:
                     System.out.println("Opción inválida. Intente nuevamente.");
                     break;
-            }      
+            }                   
         } while (tipo != 4); 
     }
 
-    public void registrarCliente(Scanner sc) {      
+    public void registrarCliente(Scanner sc) {    
+        
         System.out.println("\n===== Regriso de cliente =====");
         System.out.print("Ingrese rut (sin guión y puntos): "); 
         String rut = sc.nextLine();
@@ -161,8 +171,8 @@ public class Menu {
         } 
     }
     
-    public void verDatosCliente(Scanner sc) {
-        verificarRut(sc);
+    public void verDatosCliente() {
+        verificarRut(sc); 
         
         if (clienteActual != null) {  
             CuentaActual.mostrarDatos();
