@@ -45,7 +45,7 @@ public class Cliente implements Interfaz {
     }
     
     @Override
-    public void verDatosCliente() {
+    public void ImostrarDatos() {
         System.out.println("\n========== Datos del cliente ==========");
         System.out.println("RUT: " + this.rut);
         System.out.println("Nombre completo: " + nombre + "" + apellidoPaterno + "" + apellidoMaterno);
