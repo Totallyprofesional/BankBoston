@@ -62,7 +62,7 @@ public class Menu {
                     tipoCuenta(sc);            
                     break;
                 case 2:
-                    verDatosCliente();
+                    verDatosCliente(sc);
                     break;
                 case 3:  
                     depositarCuenta(sc);  
@@ -168,32 +168,23 @@ public class Menu {
         } 
     }  
        
-    public void verificarRut(Scanner sc) {
+    public void verDatosCliente(Scanner sc) {
         System.out.print("Ingrese RUT del cliente: ");
         String rut = sc.nextLine();
         
-        Cliente nuevoCliente = bankManager.buscarCliente(rut);
-        if (nuevoCliente != null) {
-            System.out.println("Abriendo cuenta:");
-            nuevoCliente.verDatosCliente();
+        Cliente ClienteActual= bankManager.buscarCliente(rut);
+        
+        if ( ClienteActual != null) {
+            System.out.println("Abriendo cuenta:"); 
+            ClienteActual.ImostrarDatos();
+            CuentaActual.mostrarDatos();
         } else {
             System.out.println("No se encontró ningún cliente con ese RUT");
         } 
     }
-    
-    public void verDatosCliente() {
-        verificarRut(sc); 
-        
-        if (clienteActual != null) {  
-            CuentaActual.mostrarDatos();
-        } else {
-            System.out.println("No hay datos de cliente");
-        } 
-    }     
-    
+   
     private void depositarCuenta(Scanner sc) {
-        verificarRut(sc);
-        CuentaActual.mostrarDatos();
+        verDatosCliente(sc);
         
         int monto = 0;
         
@@ -204,12 +195,11 @@ public class Menu {
             System.out.println("Saldo actual: " + CuentaActual.getSaldo());
         } catch (InputMismatchException e) {
             System.out.println("Valor no válido");
-        }   
+        }    
     }
         
     private void girarCuenta(Scanner sc) {
-        verificarRut(sc);
-        CuentaActual.mostrarDatos();
+        verDatosCliente(sc);
         
         int monto = 0;
         
