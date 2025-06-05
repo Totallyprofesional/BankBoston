@@ -139,7 +139,7 @@ public class Menu {
         if (bankManager.buscarCliente(rut) != null) {
             System.out.println("Error: Ya existe un cliente con ese RUT");
             return;
-        }
+        } 
         
         System.out.print("Ingrese nombre: ");
         String nombre = sc.nextLine();
@@ -158,12 +158,13 @@ public class Menu {
             Cliente nuevoCliente = new Cliente(rut, nombre, apellidoPaterno, apellidoMaterno, domicilio, comuna, teléfono);      
             
             if (nuevoCliente.registrarCliente() && bankManager.agregarCliente(nuevoCliente)) {         
-                clienteActual = nuevoCliente;               
-                CuentaActual.mostrarDatos();  
-                System.out.print("Cuenta creada exitosamente: ");
-            }  
-        } catch (IllegalArgumentException e) { 
-            System.out.println("Error: " + e.getMessage());          
+                
+                clienteActual = nuevoCliente;              
+                CuentaActual.mostrarDatos();              
+            }   
+            
+            } catch (IllegalArgumentException e) { 
+                System.out.println("Error: " + e.getMessage());          
         } 
     }  
        
@@ -197,7 +198,7 @@ public class Menu {
         int monto = 0;
         
         try {
-            System.out.println("Ingrese monto");
+            System.out.println("\n Ingrese monto");
             monto = sc.nextInt();
             CuentaActual.depositarSaldo(monto);  
             System.out.println("Saldo actual: " + CuentaActual.getSaldo());
