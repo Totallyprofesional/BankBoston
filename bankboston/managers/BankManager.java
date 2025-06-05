@@ -18,7 +18,7 @@ public class BankManager {
     
     private BankManager() {
         this.clientes = new HashMap<>();
-        this.contadorClientes = 1000;
+        this.contadorClientes = 100000000;
     }
     
     public static BankManager getInstancia() {
@@ -35,7 +35,7 @@ public class BankManager {
         clientes.put(cliente.getRut(), cliente);
         return true;
     }
-      // Revision
+    
     public Cliente buscarCliente(String rut) {
         return clientes.get(rut);
     }
