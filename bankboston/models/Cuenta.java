@@ -5,10 +5,10 @@
 package bankboston.models;
 
 import java.time.LocalDate;
-
+ 
 public abstract class Cuenta { 
     protected LocalDate fechaCreacion;
-    protected int contadorCuenta = 1000;   
+    protected int contadorCuenta = 100000000;   
     protected int cuentaCorriente;
     protected int saldo; 
     protected int monto;

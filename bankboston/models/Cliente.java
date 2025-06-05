@@ -12,7 +12,7 @@ public class Cliente implements Interfaz {
     private String domicilio;
     private String comuna;
     private int teléfono;    
-    private Cuenta cuenta;
+    private Cuenta cuenta; 
 
     public Cliente(String rut, String nombre, String apellidoPaterno, String apellidoMaterno, String domicilio, String comuna, int teléfono) {
         if (!validarRut(rut)) {
@@ -38,7 +38,7 @@ public class Cliente implements Interfaz {
     
     public boolean registrarCliente() {       
         if (validarRut(rut)) {
-            System.out.println("Cliente registrado correctamente: " + nombre + " " + apellidoPaterno + " " + apellidoMaterno);
+            System.out.println("\n Cliente registrado correctamente: " + nombre + " " + apellidoPaterno + " " + apellidoMaterno);
             return true;
         } 
         return false;    
@@ -57,7 +57,11 @@ public class Cliente implements Interfaz {
     public String getRut() {
         return rut;
     }
-    
+
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
     public Cuenta getCuenta() {
         return cuenta;
     }
